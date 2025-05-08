@@ -3,7 +3,7 @@
     <div class="section-header">
         <h2>Nos Produits</h2>
     </div>
-
+    
     <div class="product-filters">
         <button class="filter-btn active" data-filter="all">Tous les produits</button>
         <button class="filter-btn" data-filter="savons">Savons</button>
@@ -12,7 +12,7 @@
         <button class="filter-btn" data-filter="cremes">Crèmes</button>
         <button class="filter-btn" data-filter="parfums">Parfums</button>
     </div>
-
+    
     <div class="products-container">
         <!-- Produit 1 - Savon -->
         <div class="product-card" data-category="savons" data-product-id="savon-naturel-001">
@@ -74,7 +74,7 @@
             <a href="#" class="product-view"><i class="fas fa-eye"></i></a>
         </div>
     </div>
-
+    
     <div class="products-hidden">
         <!-- Produit 4 - Gommage -->
         <div class="product-card" data-category="gommages" data-product-id="gommage-visage-004">
@@ -115,7 +115,7 @@
             </div>
             <a href="#" class="product-view"><i class="fas fa-eye"></i></a>
         </div>
-
+        
         <!-- Autres produits cachés -->
         <div class="product-card" data-category="savons" data-product-id="savon-argile-006">
             <div class="product-image">
@@ -135,7 +135,7 @@
             </div>
             <a href="#" class="product-view"><i class="fas fa-eye"></i></a>
         </div>
-
+        
         <!-- Nouveaux produits pour Huiles Essentielles -->
         <div class="product-card" data-category="huiles" data-product-id="huile-tea-tree-007">
             <div class="product-image">
@@ -155,7 +155,7 @@
             </div>
             <a href="#" class="product-view"><i class="fas fa-eye"></i></a>
         </div>
-
+        
         <div class="product-card" data-category="huiles" data-product-id="huile-eucalyptus-008">
             <div class="product-image">
                 <img src="{{ asset('images/huile-eucalyptus.jpg') }}" alt="Huile Essentielle d'Eucalyptus">
@@ -174,7 +174,7 @@
             </div>
             <a href="#" class="product-view"><i class="fas fa-eye"></i></a>
         </div>
-
+        
         <div class="product-card" data-category="huiles" data-product-id="huile-ylang-009">
             <div class="product-image">
                 <img src="{{ asset('images/huile-ylang.jpg') }}" alt="Huile Essentielle d'Ylang-Ylang">
@@ -193,7 +193,7 @@
             </div>
             <a href="#" class="product-view"><i class="fas fa-eye"></i></a>
         </div>
-
+        
         <!-- Nouveaux produits pour Gommages -->
         <div class="product-card" data-category="gommages" data-product-id="gommage-cafe-010">
             <div class="product-image">
@@ -213,7 +213,7 @@
             </div>
             <a href="#" class="product-view"><i class="fas fa-eye"></i></a>
         </div>
-
+        
         <div class="product-card" data-category="gommages" data-product-id="gommage-sucre-011">
             <div class="product-image">
                 <img src="{{ asset('images/gommage-sucre.jpg') }}" alt="Gommage au Sucre">
@@ -232,7 +232,7 @@
             </div>
             <a href="#" class="product-view"><i class="fas fa-eye"></i></a>
         </div>
-
+        
         <div class="product-card" data-category="gommages" data-product-id="gommage-sel-012">
             <div class="product-image">
                 <img src="{{ asset('images/gommage-sel.jpg') }}" alt="Gommage au Sel de Mer">
@@ -251,11 +251,10 @@
             </div>
             <a href="#" class="product-view"><i class="fas fa-eye"></i></a>
         </div>
-        <!-- Ajoutez d'autres produits cachés ici si nécessaire -->
     </div>
-
+    
     <div class="view-more-container">
-        <button class="btn btn-secondary view-more-btn">Voir plus de produits</button>
+        <button class="btn btn-secondary view-more">Voir plus</button>
     </div>
 </section>
 <!-- End Nos Produits Section -->

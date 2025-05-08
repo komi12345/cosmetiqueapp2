@@ -157,23 +157,33 @@ document.addEventListener('DOMContentLoaded', () => {
                                 if ((cardId && cardId === collectionId) || 
                                     (resultTitle && cardTitle && cardTitle.trim() === resultTitle.trim())) {
                                     // Found the collection in hidden section
-                                    console.log("Search: Collection found in hidden section, clicking 'Voir plus'");
+                                    console.log("Search: Collection found in hidden section, ensuring it's visible.");
                                     
-                                    // Click the "Voir plus" button to reveal hidden collections
                                     const viewMoreBtn = collectionsSection.querySelector('.view-more-collections');
                                     if (viewMoreBtn) {
-                                        viewMoreBtn.click();
-                                        console.log("Search: Clicked 'Voir plus' button");
-                                        
-                                        // Wait for hidden collections to become visible
-                                        await new Promise(resolve => setTimeout(resolve, 1000));
-                                        
-                                        // Now try to find the collection again
-                                        collectionCard = card; // We already have the reference
-                                        break;
+                                        if (viewMoreBtn.textContent.toLowerCase().includes('plus')) { // Check if it needs expanding
+                                            viewMoreBtn.click();
+                                            console.log("Search: Clicked 'Voir plus' collections button.");
+                                            await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for animation
+                                        } else {
+                                            console.log("Search: Collections 'Voir plus' button suggests content may already be visible (e.g., 'Voir moins').");
+                                        }
                                     } else {
-                                        console.log("Search: 'Voir plus' button not found");
+                                        console.log("Search: 'Voir plus' button for collections not found.");
                                     }
+
+                                    // Force display of hidden collections container and its items
+                                    const hiddenCollectionsContainer = collectionsSection.querySelector('.collections-hidden');
+                                    if (hiddenCollectionsContainer) {
+                                        hiddenCollectionsContainer.classList.add('active');
+                                        hiddenCollectionsContainer.querySelectorAll('.collection-card').forEach(c => {
+                                            c.style.display = 'block'; 
+                                        });
+                                        console.log("Search: Ensured .collections-hidden is active and its cards are display:block.");
+                                    }
+                                    
+                                    collectionCard = card; // Assign the found card
+                                    break; // Exit the loop for hiddenCollections
                                 }
                             }
                         } else {
@@ -199,44 +209,47 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
             // Handle product search results
-            else if (clickedResult.dataset.productId) {
+            else if (clickedResult.dataset.resultType === 'product' || clickedResult.dataset.productId) {
                 const productId = clickedResult.dataset.productId;
                 console.log(`Search: Clicked product result: ${productId}`);
-                
                 if (productsSection) {
-                    // First scroll to products section
                     productsSection.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // Wait a moment for the scroll to complete
                     await new Promise(resolve => setTimeout(resolve, 400));
-                    
-                    // Try to find the product in visible products first
                     let productCard = productsSection.querySelector(`.products-container .product-card[data-product-id='${productId}']`);
-                    
-                    // If not found in visible products, check if it's in hidden products
-                    if (!productCard) {
-                        const hiddenProductCard = productsSection.querySelector(`.products-hidden .product-card[data-product-id='${productId}']`);
-                        
-                        if (hiddenProductCard) {
-                            console.log("Search: Product found in hidden section, clicking 'Voir plus'");
-                            // Product is hidden, click "Voir plus" button
-                            const viewMoreBtn = productsSection.querySelector('.view-more-btn'); // Corrected selector
-                            if (viewMoreBtn && viewMoreBtn.textContent.toLowerCase().includes('plus')) {
-                                viewMoreBtn.click();
-                                // Wait for hidden products to become visible
-                                await new Promise(resolve => setTimeout(resolve, 800));
-                                
-                                // Try to find the product again after expanding, ensure it's queried from the correct, possibly updated, DOM
-                                productCard = productsSection.querySelector(`.product-card[data-product-id='${productId}']`);
+                    if (!productCard) { // Not found in visible products
+                        const foundInHidden = productsSection.querySelector(`.products-hidden .product-card[data-product-id='${productId}']`);
+                        if (foundInHidden) {
+                            console.log("Search: Product found in hidden section, ensuring it's visible.");
+                            const viewMoreBtn = productsSection.querySelector('.view-more'); // Product's "Voir plus" button
+
+                            if (viewMoreBtn) {
+                                if (viewMoreBtn.textContent.toLowerCase().includes('plus')) { // Check if it needs expanding
+                                    viewMoreBtn.click();
+                                    console.log("Search: Clicked 'Voir plus' products button.");
+                                    await new Promise(resolve => setTimeout(resolve, 800)); // Wait for animation
+                                } else {
+                                    console.log("Search: Products 'Voir plus' button suggests content may already be visible (e.g., 'Voir moins').");
+                                }
+                            } else {
+                                console.log("Search: 'Voir plus' button for products not found.");
                             }
+
+                            // Force display of hidden products container and its items
+                            const hiddenProductsContainer = productsSection.querySelector('.products-hidden');
+                            if (hiddenProductsContainer) {
+                                hiddenProductsContainer.classList.add('active'); // Ensure container is active
+                                // Ensure all cards within are display: block
+                                hiddenProductsContainer.querySelectorAll('.product-card').forEach(card => {
+                                    card.style.display = 'block';
+                                });
+                                console.log("Search: Ensured .products-hidden is active and its cards are display:block.");
+                            }
+                            
+                            productCard = foundInHidden; // Assign the card from the hidden section
                         }
                     }
-                    
                     if (productCard) {
-                        // Scroll to the specific product
                         productCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        
-                        // Highlight the product
                         productCard.classList.add('highlighted-product');
                         setTimeout(() => {
                             productCard.classList.remove('highlighted-product');

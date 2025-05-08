@@ -1,7 +1,8 @@
 <!-- Section Avis Clients -->
 <section id="testimonials-section" class="testimonials-section">
     <div class="section-header">
-        <h2>Ce que nos clients disent</h2>
+        <h2>Ce que disent nos clients</h2>
+        <p>Découvrez les expériences de nos clients satisfaits.</p>
     </div>
 
     <div class="testimonials-container">
@@ -31,7 +32,7 @@
                     <p>15 juin 2023</p>
                 </div>
             </div>
-
+            
             <!-- Témoignage 2 -->
             <div class="testimonial-card">
                 <div class="testimonial-header">
@@ -57,7 +58,7 @@
                     <p>3 mai 2023</p>
                 </div>
             </div>
-
+            
             <!-- Témoignage 3 -->
             <div class="testimonial-card">
                 <div class="testimonial-header">
@@ -83,7 +84,7 @@
                     <p>27 avril 2023</p>
                 </div>
             </div>
-
+            
             <!-- Témoignage 4 -->
             <div class="testimonial-card">
                 <div class="testimonial-header">
@@ -109,7 +110,7 @@
                     <p>12 avril 2023</p>
                 </div>
             </div>
-
+            
             <!-- Témoignage 5 -->
             <div class="testimonial-card">
                 <div class="testimonial-header">
@@ -135,7 +136,7 @@
                     <p>5 mars 2023</p>
                 </div>
             </div>
-
+            
             <!-- Témoignage 6 -->
             <div class="testimonial-card">
                 <div class="testimonial-header">
@@ -173,4 +174,4 @@
         </button>
     </div>
 </section>
-<!-- Fin Section Avis Clients -->
+<!-- End Section Avis Clients -->

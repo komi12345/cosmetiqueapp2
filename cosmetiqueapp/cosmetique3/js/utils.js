@@ -1,1 +1,0 @@
-// Fichier contenant des fonctions utilitaires qui peuvent être utilisées par les autres modules

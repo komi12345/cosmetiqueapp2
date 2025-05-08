@@ -6,11 +6,12 @@
         </div>
         <div class="nav-links">
             <ul>
-                <li><a href="{{ url('/') }}" class="{{ request()->is('/') ? 'active' : '' }}">Accueil</a></li>
-                <li><a href="{{ url('/#products-section') }}">Produits</a></li>
-                <li><a href="{{ url('/#collections-section') }}">Collections</a></li>
-                <li><a href="{{ url('/#about-section') }}">Notre Histoire</a></li>
-                <li><a href="{{ url('/#contact-section') }}">Contact</a></li>
+                <li><a href="#" class="active">Accueil</a></li>
+                <li><a href="#products-section">Produits</a></li>
+                <li><a href="#collections-section">Collections</a></li>
+                <li><a href="#blog-section">Blog</a></li>
+                <li><a href="#about-section">Notre Histoire</a></li>
+                <li><a href="#contact-section">Contact</a></li>
             </ul>
         </div>
         <div class="nav-icons">
@@ -24,7 +25,7 @@
             <span class="bar"></span>
         </div>
     </nav>
-
+    
     <div class="search-container">
         <div class="search-box">
             <input type="text" placeholder="Rechercher un produit...">
@@ -32,7 +33,7 @@
             <button class="close-search"><i class="fas fa-times"></i></button>
         </div>
     </div>
-
+    
     <!-- Fenêtre du panier -->
     <div class="cart-container">
         <div class="cart-box">

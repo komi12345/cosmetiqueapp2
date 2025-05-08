@@ -85,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (productId) {
                         resultItem.setAttribute('data-product-id', productId);
                     }
+                    resultItem.setAttribute('data-result-type', 'product');
                 } else if (result.type === 'collection') {
                     // Add collection identifier
                     const collectionId = card.getAttribute('data-collection-id');

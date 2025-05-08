@@ -3,7 +3,7 @@
     <div class="section-header">
         <h2>Nos Collections</h2>
     </div>
-
+    
     <div class="collections-container">
         <!-- Collection 1 -->
         <div class="collection-card" data-collection-id="collection-001">
@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="collections-hidden">
         <!-- Collection 4 -->
         <div class="collection-card" data-collection-id="collection-004">
@@ -79,7 +79,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="view-more-container">
         <button class="btn btn-secondary view-more-collections">Voir plus</button>
     </div>

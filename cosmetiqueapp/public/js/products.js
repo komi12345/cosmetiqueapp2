@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // --- Section Produits ---
-    const productsSection = document.querySelector('.products-section');
-    if (productsSection) {
-        const filterBtns = productsSection.querySelectorAll('.filter-btn');
-        const productCards = productsSection.querySelectorAll('.product-card'); // Sélectionne toutes les cartes initialement
-        const productsContainer = productsSection.querySelector('.products-container');
-        const hiddenProducts = productsSection.querySelector('.products-hidden');
-        const viewMoreBtn = productsSection.querySelector('.view-more-btn');
+    // Gestion des boutons de filtre
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('.product-card');
+    const productsContainer = document.querySelector('.products-container');
+    const hiddenProducts = document.querySelector('.products-hidden');
+    const viewMoreBtn = document.querySelector('.view-more');
     
     // Fonction pour filtrer les produits
     function filterProducts(category) {
@@ -77,8 +75,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Fonctionnalité pour le bouton "Voir plus/Voir moins" (Produits)
-    if (viewMoreBtn && hiddenProducts) { // Assurez-vous que les deux existent
+    // Fonctionnalité pour le bouton "Voir plus/Voir moins"
+    if (viewMoreBtn) {
         viewMoreBtn.addEventListener('click', function() {
             if (this.textContent === 'Voir plus') {
                 // Afficher tous les produits cachés
@@ -205,66 +203,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    } // Fin du if (productsSection)
-
-    // --- Section Collections ---
-    const collectionsSection = document.querySelector('.collections-section');
-    if (collectionsSection) {
-        const viewMoreCollectionsBtn = collectionsSection.querySelector('.view-more-collections');
-        const collectionsHidden = collectionsSection.querySelector('.collections-hidden');
-
-        if (viewMoreCollectionsBtn && collectionsHidden) {
-            viewMoreCollectionsBtn.addEventListener('click', function() {
-                collectionsHidden.classList.toggle('active');
-
-                if (collectionsHidden.classList.contains('active')) {
-                    // Rendre les collections cachées visibles (si nécessaire, dépend du CSS)
-                    const hiddenCollectionCards = collectionsHidden.querySelectorAll('.collection-card');
-                    hiddenCollectionCards.forEach(card => {
-                        card.style.display = 'flex'; // Ou 'block' selon votre CSS
-                    });
-                    viewMoreCollectionsBtn.textContent = 'Voir moins';
-                } else {
-                    viewMoreCollectionsBtn.textContent = 'Voir plus';
-                }
-            });
-        }
-
-        // Ajouter des écouteurs d'événements pour les boutons "Commander" dans la section collections
-        const collectionOrderBtns = collectionsSection.querySelectorAll('.order-now');
-        collectionOrderBtns.forEach(orderBtn => {
-            orderBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                const collectionCard = this.closest('.collection-card');
-                if (!collectionCard) return; // S'assurer qu'on est bien dans une carte collection
-
-                const productName = collectionCard.querySelector('h3').textContent;
-                const productPrice = collectionCard.querySelector('.collection-price span').textContent;
-                const price = parseFloat(productPrice.replace('€', '').trim());
-                const productImage = collectionCard.querySelector('img').src;
-                const quantity = 1; // Les collections n'ont pas de sélecteur de quantité ici
-
-                const singleItemOrder = [{
-                    name: productName,
-                    price: price,
-                    image: productImage,
-                    quantity: quantity
-                }];
-                redirectToWhatsAppCheckout(singleItemOrder);
-            });
+    // Fonctionnalité pour le bouton "Voir plus" des collections
+    const viewMoreCollectionsBtn = document.querySelector('.view-more-collections');
+    const collectionsHidden = document.querySelector('.collections-hidden');
+    
+    if (viewMoreCollectionsBtn && collectionsHidden) {
+        viewMoreCollectionsBtn.addEventListener('click', function() {
+            collectionsHidden.classList.toggle('active');
+            
+            if (collectionsHidden.classList.contains('active')) {
+                viewMoreCollectionsBtn.textContent = 'Voir moins';
+            } else {
+                viewMoreCollectionsBtn.textContent = 'Voir plus';
+            }
         });
-
-    } // Fin du if (collectionsSection)
-
-    // --- Fonctions Globales (si nécessaire, comme redirectToWhatsAppCheckout) ---
-    // Assurez-vous que la fonction redirectToWhatsAppCheckout est définie globalement
-    // ou importée si vous utilisez des modules.
-    // Exemple de définition globale (si elle n'existe pas déjà ailleurs):
-    /*
-    function redirectToWhatsAppCheckout(items) {
-        // ... implémentation de la fonction ...
-        console.log("Redirection WhatsApp avec:", items);
     }
-    */
-
 });
