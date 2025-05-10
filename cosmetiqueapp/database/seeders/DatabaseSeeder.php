@@ -17,7 +17,16 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'user@example.com',
+            'password' => bcrypt('password'), // It's good practice to set a known password for test users
+            'is_admin' => false,
+        ]);
+
+        User::factory()->create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'), // Set a known password for the admin user
+            'is_admin' => true,
         ]);
     }
 }
