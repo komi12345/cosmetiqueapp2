@@ -38,15 +38,15 @@ class CollectionController extends Controller
             'description' => 'nullable|string',
             'products' => 'nullable|array',
             'products.*' => 'exists:products,id',
-            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Optional
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $data = $request->only('name', 'description');
 
-        // if ($request->hasFile('image')) { // Optional
-        //     $path = $request->file('image')->store('public/collections');
-        //     $data['image'] = Storage::url($path);
-        // }
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('collections', 'public');
+            $data['image'] = $path; // Store relative path from 'storage/app/public'
+        }
 
         $collection = Collection::create($data);
 
@@ -87,24 +87,24 @@ class CollectionController extends Controller
             'description' => 'nullable|string',
             'products' => 'nullable|array',
             'products.*' => 'exists:products,id',
-            // 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Optional
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $data = $request->only('name', 'description');
 
-        // if ($request->hasFile('image')) { // Optional
-        //     // Delete old image if exists
-        //     if ($collection->image) {
-        //         Storage::delete(str_replace('/storage', 'public', $collection->image));
-        //     }
-        //     $path = $request->file('image')->store('public/collections');
-        //     $data['image'] = Storage::url($path);
-        // } elseif ($request->input('remove_image')) { // Optional for removing image
-        //     if ($collection->image) {
-        //         Storage::delete(str_replace('/storage', 'public', $collection->image));
-        //         $data['image'] = null;
-        //     }
-        // }
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($collection->image) {
+                Storage::disk('public')->delete($collection->image);
+            }
+            $path = $request->file('image')->store('collections', 'public');
+            $data['image'] = $path; // Store relative path from 'storage/app/public'
+        } elseif ($request->boolean('remove_image')) { // Check if remove_image is true
+            if ($collection->image) {
+                Storage::disk('public')->delete($collection->image);
+                $data['image'] = null;
+            }
+        }
 
         $collection->update($data);
 
@@ -123,9 +123,9 @@ class CollectionController extends Controller
      */
     public function destroy(Collection $collection)
     {
-        // if ($collection->image) { // Optional
-        //     Storage::delete(str_replace('/storage', 'public', $collection->image));
-        // }
+        if ($collection->image) {
+            Storage::disk('public')->delete($collection->image);
+        }
         $collection->products()->detach();
         $collection->delete();
 

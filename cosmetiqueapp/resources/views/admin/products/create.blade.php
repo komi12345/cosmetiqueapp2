@@ -25,21 +25,21 @@
                         <!-- Name -->
                         <div>
                             <x-input-label for="name" :value="__('Name')" />
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                            <x-text-input id="name" class="block mt-1 w-full text-purple-500 text-lg" type="text" name="name" :value="old('name')" required autofocus />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
                         <!-- Description -->
                         <div class="mt-4">
                             <x-input-label for="description" :value="__('Description')" />
-                            <textarea id="description" name="description" rows="4" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">{{ old('description') }}</textarea>
+                            <textarea id="description" name="description" rows="4" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm text-gray-600 text-sm leading-relaxed">{{ old('description') }}</textarea>
                             <x-input-error :messages="$errors->get('description')" class="mt-2" />
                         </div>
 
                         <!-- Price -->
                         <div class="mt-4">
                             <x-input-label for="price" :value="__('Price')" />
-                            <x-text-input id="price" class="block mt-1 w-full" type="number" name="price" :value="old('price')" required step="0.01" min="0" />
+                            <x-text-input id="price" class="block mt-1 w-full text-gray-800 text-xl font-semibold" type="number" name="price" :value="old('price')" required step="0.01" min="0" />
                             <x-input-error :messages="$errors->get('price')" class="mt-2" />
                         </div>
 
